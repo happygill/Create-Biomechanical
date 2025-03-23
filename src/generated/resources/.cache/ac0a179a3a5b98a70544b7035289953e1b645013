@@ -1,0 +1,11 @@
+// 1.21.1	2025-03-22T22:10:11.5476752	Registrate Provider for createbiomechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (enchantments), Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+4d960457b060713eeae5390133dd5683bd8027bf assets/createbiomechanical/blockstates/power_core.json
+4323755809fda7eff67063e04d1d2129eed663a6 assets/createbiomechanical/blockstates/station.json
+cb510f281b5001c17f07d416ed057a1af40b4158 assets/createbiomechanical/lang/en_ud.json
+1293256daac16d5e1d753436b563e0fe39926fa3 assets/createbiomechanical/lang/en_us.json
+8f7272a0b12647868a100afd251e42a07537b90c assets/createbiomechanical/models/item/power_core.json
+d036755594dedf47103065523f20bec622382bb2 assets/createbiomechanical/models/item/station.json
+8458b1df18a85c6f4b237c05ce618f6424e187f6 data/createbiomechanical/loot_table/blocks/power_core.json
+638271a91757dc0cc8cd22b747f259ae28211c62 data/createbiomechanical/loot_table/blocks/station.json
+6dcd3a6c4812aac3f4a500a0d8b5f2dc5236d8c4 data/minecraft/tags/block/mineable/axe.json
+6dcd3a6c4812aac3f4a500a0d8b5f2dc5236d8c4 data/minecraft/tags/block/mineable/pickaxe.json
