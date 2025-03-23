@@ -24,10 +24,6 @@
       "model": "createbiomechanical:block/station/block",
       "y": 90
     },
-    "facing=east,shape=top": {
-      "model": "createbiomechanical:block/station/block",
-      "y": 90
-    },
     "facing=east,shape=top_back_left": {
       "model": "createbiomechanical:block/station/block",
       "y": 90
@@ -60,9 +56,6 @@
       "model": "createbiomechanical:block/station/block"
     },
     "facing=north,shape=front_center": {
-      "model": "createbiomechanical:block/station/block"
-    },
-    "facing=north,shape=top": {
       "model": "createbiomechanical:block/station/block"
     },
     "facing=north,shape=top_back_left": {
@@ -98,10 +91,6 @@
       "y": 180
     },
     "facing=south,shape=front_center": {
-      "model": "createbiomechanical:block/station/block",
-      "y": 180
-    },
-    "facing=south,shape=top": {
       "model": "createbiomechanical:block/station/block",
       "y": 180
     },
@@ -142,10 +131,6 @@
       "y": 270
     },
     "facing=west,shape=front_center": {
-      "model": "createbiomechanical:block/station/block",
-      "y": 270
-    },
-    "facing=west,shape=top": {
       "model": "createbiomechanical:block/station/block",
       "y": 270
     },
