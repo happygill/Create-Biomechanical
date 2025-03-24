@@ -1,6 +1,7 @@
 package com.happysg.createbiomechanical;
 
 import com.happysg.createbiomechanical.registry.*;
+import com.happysg.createbiomechanical.content.tuner.GolemTunerOverlayRenderer;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.RegistrateDataProvider;
@@ -29,11 +30,14 @@ public class Biomechanical {
         BMPartials.register();
         BMCreativeModTabs.register(modEventBus);
         modEventBus.addListener(Biomechanical::gatherData);
+        modEventBus.addListener(GolemTunerOverlayRenderer::registerOverlay);
     }
 
     private static void gatherData(GatherDataEvent event) {
         event.getGenerator().addProvider(true, REGISTRATE.setDataProvider(new RegistrateDataProvider(REGISTRATE, MODID, event)));
     }
+
+
 
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
