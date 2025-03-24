@@ -22,7 +22,7 @@ public class CogolemAnimation {
     }
 
     public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> genericAttackAnimation(T animatable, RawAnimation attackAnimation) {
-        return new AnimationController<>(animatable, "Attack", 0, state -> {
+        return new AnimationController<>(animatable, "Attack", 5, state -> {
             if (animatable.swinging)
                 return state.setAndContinue(attackAnimation);
 

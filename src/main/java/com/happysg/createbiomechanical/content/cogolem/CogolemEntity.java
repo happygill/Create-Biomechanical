@@ -1,5 +1,6 @@
 package com.happysg.createbiomechanical.content.cogolem;
 
+import com.happysg.createbiomechanical.Biomechanical;
 import com.happysg.createbiomechanical.content.tuner.ITunerOverlay;
 import com.happysg.createbiomechanical.registry.BMItems;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -16,13 +17,16 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
+import net.tslat.smartbrainlib.api.core.navigation.SmoothGroundNavigation;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -49,7 +53,23 @@ public class CogolemEntity extends PathfinderMob implements GeoEntity, SmartBrai
     }
 
     @Override
-    protected void registerGoals() {
+    protected PathNavigation createNavigation(Level level) {
+        return new SmoothGroundNavigation(this, level);
+    }
+
+    @Override
+    protected void registerGoals() {}
+
+    @Override
+    public void tick() {
+        super.tick();
+        double motion =Math.abs(getDeltaMovement().x + getDeltaMovement().z)*.1;
+        takeCharge((float) motion);
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
     }
 
     @Override
@@ -67,6 +87,14 @@ public class CogolemEntity extends PathfinderMob implements GeoEntity, SmartBrai
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 
+    protected void tickDeath() {
+        this.deathTime++;
+        if (this.deathTime >= 30 && !this.level().isClientSide() && !this.isRemoved()) {
+            this.level().broadcastEntityEvent(this, (byte)60);
+            this.remove(Entity.RemovalReason.KILLED);
+        }
+    }
+
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
         this.setChargeLevel(MAX_CHARGE_LEVEL);
@@ -79,7 +107,20 @@ public class CogolemEntity extends PathfinderMob implements GeoEntity, SmartBrai
     }
 
     public void setChargeLevel(float chargeLevel) {
+        if(chargeLevel < 0)
+            return;
         this.entityData.set(CHARGE_LEVEL, Math.min(chargeLevel, MAX_CHARGE_LEVEL));
+    }
+
+    public boolean takeCharge(float amount) {
+        if(amount < 0)
+            return false;
+        float newCharge = this.getChargeLevel() - amount;
+        if(newCharge < 0) {
+            newCharge = 0;
+        }
+        this.setChargeLevel(newCharge);
+        return true;
     }
 
     public GolemCommands getCommand() {

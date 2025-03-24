@@ -3,6 +3,7 @@ package com.happysg.createbiomechanical.content.cogolem;
 import com.happysg.createbiomechanical.content.cogolem.behavior.FollowOwner;
 import com.happysg.createbiomechanical.registry.BMBlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +40,7 @@ public class CogolemAI {
 
     public static BrainActivityGroup<CogolemEntity> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
-                new MoveToWalkTarget<CogolemEntity>().startCondition(cogolemEntity -> cogolemEntity.getCommand() != GolemCommands.STAY),
+                new MoveToWalkTarget<CogolemEntity>().startCondition(cogolemEntity -> cogolemEntity.getCommand() != GolemCommands.STAY && cogolemEntity.getChargeLevel() > 0),
                 new LookAtTarget<>().runFor(entity -> entity.getRandom().nextIntBetweenInclusive(40, 300))
         );
 
@@ -48,8 +49,8 @@ public class CogolemAI {
     public static BrainActivityGroup<CogolemEntity> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<CogolemEntity>(
-                        new TargetOrRetaliate<>().attackablePredicate(target -> target instanceof Enemy).alertAlliesWhen((mob, entity) -> true),
-                        new FollowOwner<>().startCondition(cogolemEntity -> cogolemEntity.getCommand() == GolemCommands.FOLLOW),
+                        new TargetOrRetaliate<>().attackablePredicate(target -> target instanceof Enemy && !(target instanceof Creeper)),
+                        new FollowOwner<>().stopFollowingWithin(2).startCondition(cogolemEntity -> cogolemEntity.getCommand() == GolemCommands.FOLLOW),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                 new OneRandomBehaviour<>(
@@ -62,7 +63,10 @@ public class CogolemAI {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<>(),
-                new AnimatableMeleeAttack<>(0).attackInterval(e->20)
+                new AnimatableMeleeAttack<CogolemEntity>(2)
+                        .attackInterval(e->20)
+                        .startCondition(cogolemEntity -> cogolemEntity.getChargeLevel() > 0)
+                        .whenStarting(cogolemEntity -> cogolemEntity.takeCharge(5))
         );
     }
 

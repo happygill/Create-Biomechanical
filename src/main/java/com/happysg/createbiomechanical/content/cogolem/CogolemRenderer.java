@@ -9,4 +9,8 @@ public class CogolemRenderer extends GeoEntityRenderer<CogolemEntity> {
         super(renderManager, new CogolemModel());
     }
 
+    @Override
+    protected float getDeathMaxRotation(CogolemEntity animatable) {
+        return 0.0F;
+    }
 }
