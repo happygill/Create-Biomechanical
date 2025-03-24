@@ -40,6 +40,7 @@ public class CogolemAI {
 
     public static BrainActivityGroup<CogolemEntity> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
+                new FollowOwner<>().stopFollowingWithin(2).startCondition(cogolemEntity -> cogolemEntity.getCommand() == GolemCommands.FOLLOW),
                 new MoveToWalkTarget<CogolemEntity>().startCondition(cogolemEntity -> cogolemEntity.getCommand() != GolemCommands.STAY && cogolemEntity.getChargeLevel() > 0),
                 new LookAtTarget<>().runFor(entity -> entity.getRandom().nextIntBetweenInclusive(40, 300))
         );
@@ -50,7 +51,6 @@ public class CogolemAI {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<CogolemEntity>(
                         new TargetOrRetaliate<>().attackablePredicate(target -> target instanceof Enemy && !(target instanceof Creeper)),
-                        new FollowOwner<>().stopFollowingWithin(2).startCondition(cogolemEntity -> cogolemEntity.getCommand() == GolemCommands.FOLLOW),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                 new OneRandomBehaviour<>(

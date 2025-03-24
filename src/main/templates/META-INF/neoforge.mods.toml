@@ -89,19 +89,19 @@ side = "BOTH"
 modId = "create"
 type = "required"
 versionRange = "[6.0.3,6.1.0)"
-ordering = "NONE"
+ordering = "BEFORE"
 side = "BOTH"
 
 [[dependencies.${ mod_id }]]
 modId = "smartbrainlib"
-mandatory = true
-versionRange = "[1.16,)"
-ordering = "NONE"
+type = "required"
+versionRange = "[1.16,2.0)"
+ordering = "BEFORE"
 side = "SERVER"
 
 [[dependencies.${ mod_id }]]
 modId = "geckolib"
 type = "required"
 versionRange = "[4.7,5.0)"
-ordering = "NONE"
+ordering = "BEFORE"
 side = "BOTH"
