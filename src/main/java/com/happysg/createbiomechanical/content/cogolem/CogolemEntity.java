@@ -1,9 +1,6 @@
 package com.happysg.createbiomechanical.content.cogolem;
 
-import com.happysg.createbiomechanical.Biomechanical;
 import com.happysg.createbiomechanical.content.tuner.ITunerOverlay;
-import com.happysg.createbiomechanical.registry.BMItems;
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import joptsimple.internal.Strings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -19,10 +16,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -32,7 +27,6 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
@@ -93,6 +87,21 @@ public class CogolemEntity extends PathfinderMob implements GeoEntity, SmartBrai
             this.level().broadcastEntityEvent(this, (byte)60);
             this.remove(Entity.RemovalReason.KILLED);
         }
+    }
+
+    @Override
+    protected float getMaxHeadRotationRelativeToBody() {
+        return super.getMaxHeadRotationRelativeToBody();
+    }
+
+    @Override
+    public int getMaxHeadXRot() {
+        return 20;
+    }
+
+    @Override
+    public int getMaxHeadYRot() {
+        return 30;
     }
 
     @Override
@@ -204,6 +213,12 @@ public class CogolemEntity extends PathfinderMob implements GeoEntity, SmartBrai
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         CogolemAnimation.registerControllers(controllerRegistrar, this);
+    }
+
+    @Override
+    public void aiStep() {
+        this.updateSwingTime();
+        super.aiStep();
     }
 
     @Override

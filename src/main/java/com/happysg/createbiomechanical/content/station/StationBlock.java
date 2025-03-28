@@ -6,6 +6,7 @@ import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -25,6 +26,13 @@ public class StationBlock extends HorizontalKineticBlock implements IBE<StationB
     public StationBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(SHAPE, StationShape.CENTER));
+    }
+
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (level.getBlockEntity(pos) instanceof StationBlockEntity stationBlockEntity) {
+            stationBlockEntity.getController().ifPresent(controller -> controller.onEntityInside(entity));
+        }
     }
 
     @Override
