@@ -1,6 +1,7 @@
 {
   "block.createbiomechanical.power_core": "Power Core",
   "block.createbiomechanical.station": "Station",
+  "block.createbiomechanical.bionic_casing": "Bionic Casing",
   "createbiomechanical.creativetab.create_biomechanical_tab": "Create: Biomechanical",
   "entity.createbiomechanical.cogolem": "Cogolem",
   "item.createbiomechanical.cogolem_spawn_egg": "Cogolem Spawn Egg",

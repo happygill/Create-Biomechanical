@@ -34,6 +34,15 @@ public class BMBlocks {
             .simpleItem()
             .register();
 
+    public static final BlockEntry<Block> BIONIC_CASING = REGISTRATE
+            .block("bionic_casing", Block::new)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c, p)))
+            .transform(axeOrPickaxe())
+            .initialProperties(SharedProperties::softMetal)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .simpleItem()
+            .register();
+
     public static void register() {
         Biomechanical.LOGGER.info("Registering Blocks for " + Biomechanical.MODID);
     }

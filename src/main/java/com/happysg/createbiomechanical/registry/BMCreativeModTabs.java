@@ -24,6 +24,7 @@ public class BMCreativeModTabs {
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(BMBlocks.STATION);
                         pOutput.accept(BMBlocks.POWER_CORE);
+                        pOutput.accept(BMBlocks.BIONIC_CASING);
                         pOutput.accept(BMItems.INCOMPLETE_ELECTRON_BATTERY);
                         pOutput.accept(BMItems.ELECTRON_BATTERY);
                         pOutput.accept(BMItems.TUNER);
