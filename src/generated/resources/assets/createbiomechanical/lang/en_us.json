@@ -1,7 +1,9 @@
 {
-  "block.createbiomechanical.power_core": "Power Core",
+  "block.createbiomechanical.power_core": "Power Core (NOT FUNCTIONAL)",
   "block.createbiomechanical.station": "Station",
-  "block.createbiomechanical.bionic_casing": "Bionic Casing",
+  "block.createbiomechanical.bionic_casing": "Bionic Casing (NOT FUNCTIONAL)",
+  "block.createbiomechanical.brass_projector": "Brass Projector (NOT FUNCTIONAL)",
+  "block.createbiomechanical.andesite_projector": "Andesite Projector (NOT FUNCTIONAL)",
   "createbiomechanical.creativetab.create_biomechanical_tab": "Create: Biomechanical",
   "entity.createbiomechanical.cogolem": "Cogolem",
   "item.createbiomechanical.cogolem_spawn_egg": "Cogolem Spawn Egg",

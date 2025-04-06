@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.happysg.createbiomechanical.Biomechanical.REGISTRATE;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -30,6 +31,7 @@ public class BMBlocks {
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c, p)))
             .transform(axeOrPickaxe())
             .initialProperties(SharedProperties::softMetal)
+            .properties(BlockBehaviour.Properties::noOcclusion)  // <-- Add noOcclusion here
             .addLayer(() -> RenderType::cutoutMipped)
             .simpleItem()
             .register();
@@ -39,6 +41,36 @@ public class BMBlocks {
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c, p)))
             .transform(axeOrPickaxe())
             .initialProperties(SharedProperties::softMetal)
+            .addLayer(() -> RenderType::cutoutMipped)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> BRASS_PROJECTOR = REGISTRATE
+            .block("brass_projector", Block::new)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c, p)))
+            .transform(axeOrPickaxe())
+            .initialProperties(SharedProperties::softMetal)
+            .properties(BlockBehaviour.Properties::noOcclusion)  // <-- Add noOcclusion here
+            .addLayer(() -> RenderType::cutoutMipped)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> ANDESITE_PROJECTOR = REGISTRATE
+            .block("andesite_projector", Block::new)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c, p)))
+            .transform(axeOrPickaxe())
+            .initialProperties(SharedProperties::softMetal)
+            .properties(BlockBehaviour.Properties::noOcclusion)  // <-- Add noOcclusion here
+            .addLayer(() -> RenderType::cutoutMipped)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> COGOLEM_HEAD = REGISTRATE
+            .block("cogolem_head", Block::new)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c, p)))
+            .transform(axeOrPickaxe())
+            .initialProperties(SharedProperties::softMetal)
+            .properties(BlockBehaviour.Properties::noOcclusion)  // <-- Add noOcclusion here
             .addLayer(() -> RenderType::cutoutMipped)
             .simpleItem()
             .register();
